@@ -19,7 +19,6 @@ public class Case {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String autoNumber;
     private String sujet;
     private String description;
     private Date date;

@@ -19,7 +19,7 @@ public class ConventionServiceImp implements ConventionService{
     private final ConventionRepo conventionRepo;
     @Override
     public Convention create(Convention convention) {
-        log.info("saving new convention: {}", convention.getNom());
+        log.info("saving new convention: {}", convention.getType());
         return conventionRepo.save(convention);
     }
 
@@ -37,7 +37,7 @@ public class ConventionServiceImp implements ConventionService{
 
     @Override
     public Convention update(Convention convention) {
-        log.info("updating convention: {}", convention.getNom());
+        log.info("updating convention: {}", convention.getType());
         return conventionRepo.save(convention);
     }
 

@@ -15,10 +15,11 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Case {
+public class Request {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    private String type;
     private String sujet;
     private String description;
     private Date date;

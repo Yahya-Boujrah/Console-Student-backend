@@ -19,7 +19,7 @@ public class Convention {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String Nom;
+    private String type;
     private String nomSociete;
     private String adresseSociete;
     private String EmailSociete;

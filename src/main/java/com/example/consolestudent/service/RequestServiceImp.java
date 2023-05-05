@@ -1,7 +1,7 @@
 package com.example.consolestudent.service;
 
-import com.example.consolestudent.model.Case;
-import com.example.consolestudent.repo.CaseRepo;
+import com.example.consolestudent.model.Request;
+import com.example.consolestudent.repo.RequestRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @Slf4j
-public class CaseServiceImp  implements CaseService{
-    private final CaseRepo caseRepo;
+public class RequestServiceImp implements RequestService {
+    private final RequestRepo requestRepo;
+
     @Override
-    public Case create(Case caseToCreate) {
+    public Request create(Request caseToCreate) {
         log.info("saving new case: {}", caseToCreate.getId());
-        return caseRepo.save(caseToCreate);
+        return requestRepo.save(caseToCreate);
     }
 }

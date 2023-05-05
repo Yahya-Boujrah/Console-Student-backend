@@ -1,8 +1,8 @@
 package com.example.consolestudent.ressource;
 
-import com.example.consolestudent.model.Case;
+import com.example.consolestudent.model.Request;
 import com.example.consolestudent.model.Response;
-import com.example.consolestudent.service.CaseServiceImp;
+import com.example.consolestudent.service.RequestServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +16,13 @@ import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("/cases")
+@RequestMapping("/requests")
 @RequiredArgsConstructor
-public class CaseResource {
+public class RequestResource {
 
-    private final CaseServiceImp caseService;
+    private final RequestServiceImp caseService;
     @PostMapping("/save")
-    public ResponseEntity<Response> saveCase(@RequestBody Case caseTosave){
+    public ResponseEntity<Response> saveCase(@RequestBody Request caseTosave){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())

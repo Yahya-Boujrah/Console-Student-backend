@@ -2,8 +2,8 @@
 spring:
   datasource:
     username: root
-    password:
-    url: jdbc:mysql://localhost:3306/console
+    password: root
+    url: jdbc:mysql://localhost:3306/gestionecole
   jpa:
     hibernate:
       ddl-auto: update

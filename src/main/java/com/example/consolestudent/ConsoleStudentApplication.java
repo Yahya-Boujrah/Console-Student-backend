@@ -3,10 +3,12 @@ package com.example.consolestudent;
 import com.example.consolestudent.model.Annonce;
 import com.example.consolestudent.model.Convention;
 import com.example.consolestudent.model.Demande;
+import com.example.consolestudent.model.Student;
 import com.example.consolestudent.repo.AnnonceRepo;
 import com.example.consolestudent.repo.ConventionRepo;
 import com.example.consolestudent.repo.DemandeRepo;
 
+import com.example.consolestudent.repo.StudentRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +29,7 @@ public class ConsoleStudentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AnnonceRepo annonceRepo, DemandeRepo demandeRepo , ConventionRepo conventionRepo){
+	CommandLineRunner run(AnnonceRepo annonceRepo, DemandeRepo demandeRepo , ConventionRepo conventionRepo, StudentRepo studentRepo){
 //		Date date = new Date();
 //		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MMMM/yyyy");
 //		String stringDate= DateFor.format(date);
@@ -37,10 +39,13 @@ public class ConsoleStudentApplication {
 //			annonceRepo.save(new Annonce(null, "Test0","this is a test 3","CP2","TC",new Date()));
 //			demandeRepo.save(new Demande(null, "demande 1", "certif", "Nouvelle","student who requested",new Date()));
 //			demandeRepo.save(new Demande(null, "demande 2", "certif", "Nouvelle","student who requested1",new Date()));
-			conventionRepo.save(new Convention(null, "convention 1", "Viseo", "casablanca","viseo@mail.com","representant"
-					,"representant", "salesforce", new Date(), new Date(),
-					"Encadrant", "Encadrant",
-					"1112233344", 4000, "especes"));
+//			conventionRepo.save(new Convention(null, "convention 1", "Viseo", "casablanca","viseo@mail.com","representant"
+//					,"representant", "salesforce", new Date(), new Date(),
+//					"Encadrant", "Encadrant",
+//					"1112233344", 4000, "especes"));
+
+			Student student = new Student(12345L, "D12345", "EE12345", "Hsaini", "yassmine", "yassmine@gmail.com", "2001", "Dakhla", "0606060606", "Azzouzia", "CI2", "GI");
+			// studentRepo.findById(12345L);
 
 		};
 	}

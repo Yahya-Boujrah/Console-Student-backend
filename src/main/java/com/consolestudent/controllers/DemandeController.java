@@ -56,7 +56,7 @@ public class DemandeController {
                         .build()
         );
     }
-    @DeleteMapping ("/delete/{id}")
+        @DeleteMapping ("/delete/{id}")
     public ResponseEntity<Response> deleteDemand(@PathVariable("id") Long id){
         return ResponseEntity.ok(
                 Response.builder()

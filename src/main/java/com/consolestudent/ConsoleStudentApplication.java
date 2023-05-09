@@ -42,8 +42,8 @@ public class ConsoleStudentApplication {
 //					,"representant", "salesforce", new Date(), new Date(),
 //					"Encadrant", "Encadrant",
 //					"1112233344", 4000, "especes"));
-//
-//
+
+
 //			studentRepo.save(new Student(12345L, "D12345", "EE12345", "Hsaini", "yassmine", "yassmine@gmail.com", "2001", "Dakhla", "0606060606", "Azzouzia", "CI2", "GI"));
 //			 studentRepo.findById(12345L);
 

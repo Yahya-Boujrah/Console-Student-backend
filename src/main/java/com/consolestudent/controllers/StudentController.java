@@ -18,7 +18,6 @@ public class StudentController {
     @Autowired
     private final StudentServiceImp studentService;
 
-
     @GetMapping("/{numApogee}")
     public ResponseEntity<Response> getStudent(@PathVariable("numApogee") Long numApogee){
         return ResponseEntity.ok(

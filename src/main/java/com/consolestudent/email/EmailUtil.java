@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailUtil {
 
-    public String buildEmail(String name, String password) {
+    public String buildEmail(String name,String cne, String password) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +

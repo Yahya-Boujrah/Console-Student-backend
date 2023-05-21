@@ -36,15 +36,8 @@ public class AuthenticationService {
     @Autowired
     EmailUtil emailUtil;
 
-    public AuthenticationResponse register(RegisterRequest request){
-        User user = User.builder()
-                .prenom(request.getFirstName())
-                .nom(request.getLastName())
-                .email(request.getEmail())
-                .cne(request.getCne())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .build();
+    public AuthenticationResponse register(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
 
         String jwtToken = jwtService.generateToken(user);
@@ -58,6 +51,7 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
+        System.out.println(request);
         User user = repository.findByEmail(request.getEmail()).orElseThrow();
 
         String jwtToken = jwtService.generateToken(user);
@@ -72,9 +66,9 @@ public class AuthenticationService {
 
         User user = repository.findByCne(request.getCne()).orElseThrow();
 
-        this.sender.send(user.getEmail(),emailUtil.buildEmail(user.getNom() + user.getPrenom(), "testpassword"));
+        this.sender.send(user.getEmail(),emailUtil.buildEmail(user.getNom() +" "+ user.getPrenom(),user.getCne(), user.getNom()+user.getCin()));
 
-        return "check your email";
+        return "Check your email";
 
     }
 

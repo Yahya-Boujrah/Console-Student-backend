@@ -1,5 +1,6 @@
 package com.consolestudent.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +28,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String nom;
 
     private String prenom;
@@ -48,11 +48,17 @@ public class User implements UserDetails {
 
     private String tel;
 
-
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Demande> demandes;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Request> requests;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

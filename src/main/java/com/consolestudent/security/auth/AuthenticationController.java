@@ -1,6 +1,7 @@
 package com.consolestudent.security.auth;
 
 
+import com.consolestudent.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+            @RequestBody User request
     ) {
         return ResponseEntity.ok(service.register(request));
     }

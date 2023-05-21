@@ -1,10 +1,13 @@
 package com.consolestudent.service;
 
 import com.consolestudent.model.Demande;
+import com.consolestudent.model.User;
 import com.consolestudent.repo.DemandeRepo;
+import com.consolestudent.repo.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,9 +21,17 @@ import static java.lang.Boolean.TRUE;
 @Slf4j
 public class DemandeServiceImp implements DemandeService{
     private final DemandeRepo demandeRepo;
+    private final UserRepository userRepository;
+
     @Override
     public Demande create(Demande demande) {
         log.info("saving new demande: {}", demande.getNom());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(username + " service");
+        User user = userRepository.findByEmail(username).orElseThrow();
+
+        System.out.println(user);
+        demande.setUser(user);
         demande.setEtat("Nouvelle");
         demande.setDateDemande(new Date());
         return demandeRepo.save(demande);

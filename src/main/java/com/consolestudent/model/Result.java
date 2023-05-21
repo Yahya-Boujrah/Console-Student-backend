@@ -1,12 +1,13 @@
 package com.consolestudent.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -14,17 +15,18 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Demande {
+@Builder
+public class Result {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String nom;
-    private String type;
-    private String etat;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-    private Date dateDemande;
+
+        private String name;
+        private Float note_finale;
+
+        @OneToMany(mappedBy = "result", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private List<Note> notes;
 
 }
+

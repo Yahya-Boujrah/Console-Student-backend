@@ -1,8 +1,6 @@
 package com.consolestudent.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +21,13 @@ public class Request {
     private String sujet;
     private String description;
     private Date date;
-    private String studentId;
     private String priorite;
     private String origine;
     private String Statut;
     private String motifRejet;
     private String commentaire;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

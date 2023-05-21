@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class PasswordRequest {
 
-//    private Date dateNaissance;
+    private Date dateNaissance;
     private String cne;
 
 

@@ -50,6 +50,9 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Column(columnDefinition ="tinyint(1) default 0")
+    private Boolean isPasswordChanged = Boolean.FALSE;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

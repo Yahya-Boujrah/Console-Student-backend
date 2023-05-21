@@ -12,7 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class PasswordChangeRequest {
-    private String email;
-
     private String password;
 }

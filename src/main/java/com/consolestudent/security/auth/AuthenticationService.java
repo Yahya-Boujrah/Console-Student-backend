@@ -9,8 +9,10 @@ import com.consolestudent.model.User;
 import com.consolestudent.repo.UserRepository;
 import com.consolestudent.security.config.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,26 +64,23 @@ public class AuthenticationService {
                 .build();
     }
 
+
     public String getOldPassword(PasswordRequest request){
 
         User user = repository.findByCne(request.getCne()).orElseThrow();
 
-        this.sender.send(user.getEmail(),emailUtil.buildEmail(user.getNom() +" "+ user.getPrenom(),user.getCne(), user.getNom()+user.getCin()));
+        if (request.getDateNaissance().compareTo(user.getDateNaissance()) != 0){
+            throw new IllegalStateException("the date doesn't match");
+        }
+
+        sendEmail(user.getEmail(),user.getNom() +" "+ user.getPrenom(),user.getCne(), user.getNom()+user.getCin());
 
         return "Check your email";
-
+    }
+    @Async
+    public void sendEmail(String email, String name, String cne, String password){
+        this.sender.send(email, emailUtil.buildEmail(name, cne, password));
     }
 
-    public String changeOldPassword(PasswordChangeRequest request){
-        User user = repository.findByEmail(request.getEmail()).orElseThrow();
-
-
-        if (passwordEncoder.matches(request.getPassword(), user.getPassword())){
-            user.setPassword(passwordEncoder.encode("newpassword"));
-            repository.save(user);
-            System.out.println("changed");
-        }
-        return "password changed";
-    }
 
 }

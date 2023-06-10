@@ -39,6 +39,7 @@ public class AuthenticationService {
     EmailUtil emailUtil;
 
     public AuthenticationResponse register(User user){
+        
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
 
@@ -80,6 +81,13 @@ public class AuthenticationService {
     @Async
     public void sendEmail(String email, String name, String cne, String password){
         this.sender.send(email, emailUtil.buildEmail(name, cne, password));
+    }
+
+
+    public Boolean isPasswordChanged(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = repository.findByEmail(email).orElseThrow();
+        return user.getIsPasswordChanged();
     }
 
 

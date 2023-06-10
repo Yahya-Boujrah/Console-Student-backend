@@ -1,12 +1,11 @@
 package com.consolestudent.controllers;
 
+import com.consolestudent.model.Annonce;
 import com.consolestudent.model.Response;
 import com.consolestudent.service.AnnonceServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -30,6 +29,10 @@ public class AnnonceController {
                         .statusCode(OK.value())
                         .build()
         );
+    }
+    @PostMapping("/save")
+        public ResponseEntity<Annonce> saveAnnonce(@RequestBody Annonce annonce){
+        return ResponseEntity.ok(annonceService.saveAnnonce(annonce));
     }
 
 }

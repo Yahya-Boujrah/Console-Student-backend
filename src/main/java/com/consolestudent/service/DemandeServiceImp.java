@@ -2,6 +2,7 @@ package com.consolestudent.service;
 
 import com.consolestudent.model.Demande;
 import com.consolestudent.model.User;
+import com.consolestudent.payloads.ServiceRequest;
 import com.consolestudent.repo.DemandeRepo;
 import com.consolestudent.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 import java.util.Date;
@@ -23,6 +26,9 @@ public class DemandeServiceImp implements DemandeService{
     private final DemandeRepo demandeRepo;
     private final UserRepository userRepository;
 
+    private final SalesforceService salesforceService;
+
+
     @Override
     public Demande create(Demande demande) {
         log.info("saving new demande: {}", demande.getNom());
@@ -34,6 +40,7 @@ public class DemandeServiceImp implements DemandeService{
         demande.setUser(user);
         demande.setEtat("Nouvelle");
         demande.setDateDemande(new Date());
+        createInSalesforce(demande);
         return demandeRepo.save(demande);
     }
 
@@ -52,7 +59,42 @@ public class DemandeServiceImp implements DemandeService{
     @Override
     public Boolean delete(Long id) {
         log.info("deleting Demand by id: {}",id);
+        deleteInSalesforce(id);
          demandeRepo.deleteById(id);
         return TRUE;
+    }
+
+
+    public Mono<ServiceRequest> createInSalesforce(Demande demande){
+
+        ServiceRequest serviceRequest = ServiceRequest.builder()
+                .Name(demande.getNom())
+                .Etat__c(demande.getEtat())
+                .Type__c(demande.getType())
+                .build();
+
+        String oauthToken = salesforceService.loginSalesforce();
+
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/").build()
+                .post()
+                //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
+                .header("Authorization", "Bearer " + oauthToken)
+                .body(Mono.just(serviceRequest), ServiceRequest.class)
+                .retrieve()
+                .bodyToMono(ServiceRequest.class);
+
+    }
+
+
+    public Mono<Void> deleteInSalesforce(Long id)
+    {
+        String oauthToken = salesforceService.loginSalesforce();
+
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/").build()
+                .delete()
+                .uri(String.valueOf(id))
+                .header("Authorization", "Bearer " + oauthToken)
+                .retrieve()
+                .bodyToMono(Void.class);
     }
 }

@@ -2,6 +2,7 @@ package com.consolestudent.controllers;
 
 import com.consolestudent.model.Annonce;
 import com.consolestudent.model.Response;
+import com.consolestudent.payloads.AnnonceFileRequest;
 import com.consolestudent.service.AnnonceServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,11 @@ public class AnnonceController {
     @PostMapping("/save")
         public ResponseEntity<Annonce> saveAnnonce(@RequestBody Annonce annonce){
         return ResponseEntity.ok(annonceService.saveAnnonce(annonce));
+    }
+
+    @PostMapping("/saveFiles")
+    public ResponseEntity<Annonce> saveFiles(@RequestBody AnnonceFileRequest request){
+        return ResponseEntity.ok(annonceService.saveAnnonceFile(request));
     }
 
 }

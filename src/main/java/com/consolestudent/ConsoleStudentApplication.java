@@ -1,14 +1,9 @@
 package com.consolestudent;
 
-import com.consolestudent.model.Annonce;
-import com.consolestudent.model.Convention;
-import com.consolestudent.model.Demande;
-import com.consolestudent.model.Student;
 import com.consolestudent.repo.AnnonceRepo;
 import com.consolestudent.repo.ConventionRepo;
 import com.consolestudent.repo.DemandeRepo;
 
-import com.consolestudent.repo.StudentRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +17,7 @@ public class ConsoleStudentApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(AnnonceRepo annonceRepo, DemandeRepo demandeRepo , ConventionRepo conventionRepo, StudentRepo studentRepo){
+	CommandLineRunner run(AnnonceRepo annonceRepo, DemandeRepo demandeRepo , ConventionRepo conventionRepo){
 //		Date date = new Date();
 //		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MMMM/yyyy");
 //		String stringDate= DateFor.format(date);

@@ -38,7 +38,7 @@ public class DemandeController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("demande",demandeService.create(demande)))
+                        .data(Map.of("demande",demandeService.createInSalesforce(demande)))
                         .message("Demand created")
                         .status(CREATED)
                         .statusCode(CREATED.value())

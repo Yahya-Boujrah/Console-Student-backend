@@ -7,4 +7,8 @@ import lombok.Data;
 public class SalesforceId {
 
     private String id;
+
+    public SalesforceId(String id) {
+        this.id = id;
+    }
 }

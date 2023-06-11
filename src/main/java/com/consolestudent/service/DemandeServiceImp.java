@@ -68,7 +68,7 @@ public class DemandeServiceImp implements DemandeService{
     }
 
 
-    public Mono<ServiceRequest> createInSalesforce(Demande demande){
+    public String createInSalesforce(Demande demande){
 
         ServiceRequest serviceRequest = ServiceRequest.builder()
                 //.BackendId__c(String.valueOf(demande.getId()))
@@ -86,7 +86,9 @@ public class DemandeServiceImp implements DemandeService{
                 .header("Authorization", "Bearer " + oauthToken)
                 .body(BodyInserters.fromValue(serviceRequest))
                 .retrieve()
-                .bodyToMono(ServiceRequest.class);
+                .bodyToMono(ServiceRequest.class)
+                .block()
+                .getName();
 
     }
 

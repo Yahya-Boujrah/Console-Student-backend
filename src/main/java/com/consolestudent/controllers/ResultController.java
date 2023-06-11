@@ -42,7 +42,7 @@ public class ResultController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("notes",null))
+                        .data(Map.of("notes",resultService.notes()))
                         .message("notes retrieved")
                         .status(CREATED)
                         .statusCode(CREATED.value())
@@ -55,7 +55,7 @@ public class ResultController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("result",null))
+                        .data(Map.of("result",resultService.getResult()))
                         .message("result retrieved")
                         .status(CREATED)
                         .statusCode(CREATED.value())

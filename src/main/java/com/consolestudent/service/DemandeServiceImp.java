@@ -45,8 +45,9 @@ public class DemandeServiceImp implements DemandeService{
         demande.setUser(user);
         demande.setEtat("Nouvelle");
         demande.setDateDemande(new Date());
-        System.out.println(createInSalesforce(demande));
-        return demandeRepo.save(demande);
+        Demande savedDemande = demandeRepo.save(demande);
+        System.out.println(createInSalesforce(savedDemande));
+        return savedDemande;
     }
 
     @Override

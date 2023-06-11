@@ -45,8 +45,9 @@ public class DemandeServiceImp implements DemandeService{
         demande.setUser(user);
         demande.setEtat("Nouvelle");
         demande.setDateDemande(new Date());
-        System.out.println(createInSalesforce(demande));
-        return demandeRepo.save(demande);
+        Demande savedDemande = demandeRepo.save(demande);
+        System.out.println(createInSalesforce(savedDemande));
+        return savedDemande;
     }
 
     @Override
@@ -73,7 +74,7 @@ public class DemandeServiceImp implements DemandeService{
     public String createInSalesforce(Demande demande){
 
         ServiceRequest serviceRequest = ServiceRequest.builder()
-                //.BackendId__c(String.valueOf(demande.getId()))
+                .BackendId__c(String.valueOf(demande.getId()))
                 .Name(demande.getNom())
                 .Etat__c(demande.getEtat())
                 .Type__c(demande.getType())

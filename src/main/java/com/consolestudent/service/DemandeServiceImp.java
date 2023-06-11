@@ -81,7 +81,7 @@ public class DemandeServiceImp implements DemandeService{
 
         return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests").build()
                 .post()
-                //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
+                .uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests")
                 .header("Authorization", "Bearer " + oauthToken)
                 .body(Mono.just(serviceRequest), ServiceRequest.class)
                 .retrieve()

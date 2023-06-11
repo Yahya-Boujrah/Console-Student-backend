@@ -26,4 +26,13 @@ public class Note {
     @ManyToOne
     @JoinColumn(name = "result_id")
     private Result result;
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", module='" + module + '\'' +
+                ", note=" + note +
+                '}';
+    }
 }

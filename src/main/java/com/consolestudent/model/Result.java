@@ -32,5 +32,16 @@ public class Result {
         @OneToMany(mappedBy = "result", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Note> notes;
 
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", note_finale=" + note_finale +
+                ", cne='" + cne + '\'' +
+                '}';
+    }
+
 }
 

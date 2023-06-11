@@ -44,8 +44,8 @@ public class ResultController {
                         .timeStamp(now())
                         .data(Map.of("notes",resultService.notes()))
                         .message("notes retrieved")
-                        .status(CREATED)
-                        .statusCode(CREATED.value())
+                        .status(OK)
+                        .statusCode(OK.value())
                         .build()
         );
     }
@@ -57,8 +57,8 @@ public class ResultController {
                         .timeStamp(now())
                         .data(Map.of("result",resultService.getResult()))
                         .message("result retrieved")
-                        .status(CREATED)
-                        .statusCode(CREATED.value())
+                        .status(OK)
+                        .statusCode(OK.value())
                         .build()
         );
     }

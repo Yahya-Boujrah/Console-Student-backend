@@ -2,6 +2,7 @@ package com.consolestudent.service;
 
 import com.consolestudent.model.Demande;
 import com.consolestudent.model.User;
+import com.consolestudent.payloads.SalesforceId;
 import com.consolestudent.payloads.ServiceRequest;
 import com.consolestudent.payloads.UpdateRequest;
 import com.consolestudent.repo.DemandeRepo;
@@ -86,9 +87,9 @@ public class DemandeServiceImp implements DemandeService{
                 .header("Authorization", "Bearer " + oauthToken)
                 .body(BodyInserters.fromValue(serviceRequest))
                 .retrieve()
-                .bodyToMono(ServiceRequest.class)
+                .bodyToMono(SalesforceId.class)
                 .block()
-                .getName();
+                .getId();
 
     }
 

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -83,7 +84,7 @@ public class DemandeServiceImp implements DemandeService{
                 .post()
                 //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
                 .header("Authorization", "Bearer " + oauthToken)
-                .body(Mono.just(serviceRequest), ServiceRequest.class)
+                .body(BodyInserters.fromValue(serviceRequest))
                 .retrieve()
                 .bodyToMono(ServiceRequest.class);
 

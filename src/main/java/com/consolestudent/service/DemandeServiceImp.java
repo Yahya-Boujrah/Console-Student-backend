@@ -110,6 +110,9 @@ public class DemandeServiceImp implements DemandeService{
 
     public String updateStatus(String Id, UpdateRequest updateRequest){
 
+        System.out.println(Id);
+        System.out.println(updateRequest.getStatus());
+
         Demande demande = demandeRepo.findById(Long.valueOf(Id)).orElseThrow();
         demande.setEtat(updateRequest.getStatus());
         demandeRepo.save(demande);

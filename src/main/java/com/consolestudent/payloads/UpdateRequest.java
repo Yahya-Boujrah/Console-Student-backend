@@ -8,6 +8,6 @@ import lombok.Data;
 @Builder
 public class UpdateRequest {
 
-    String status;
+    private String status;
 
 }

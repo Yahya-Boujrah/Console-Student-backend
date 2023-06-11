@@ -1,10 +1,7 @@
 package com.consolestudent.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +24,6 @@ public class Note {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "result_id")
     private Result result;
 }

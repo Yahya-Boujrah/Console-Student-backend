@@ -1,6 +1,7 @@
 package com.consolestudent.payloads;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import lombok.Data;
 @Builder
 public class UpdateRequest {
 
-    private String status;
+   @JsonProperty("status")
+   private String status;
 
 }

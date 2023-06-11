@@ -1,5 +1,6 @@
 package com.consolestudent.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,6 +24,8 @@ public class Note {
 
     private String module;
     private Float note;
+
+    @JsonIgnore
     @ManyToOne
     private Result result;
 }

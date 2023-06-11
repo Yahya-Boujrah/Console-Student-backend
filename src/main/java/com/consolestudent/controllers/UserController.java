@@ -5,10 +5,7 @@ import com.consolestudent.security.auth.PasswordChangeRequest;
 import com.consolestudent.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -34,6 +31,18 @@ public class UserController {
                         .statusCode(OK.value())
                         .build()
                 );
+    }
+    @GetMapping("/getInfos")
+    public ResponseEntity<Response> getInfos(){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("user",userService.getInfos()))
+                        .message("user infos")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
     }
 
 }

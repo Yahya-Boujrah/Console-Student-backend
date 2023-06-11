@@ -25,4 +25,9 @@ public class UserService {
         repository.save(user);
         return "password changed";
     }
+
+    public User getInfos(){
+        String usernmae = SecurityContextHolder.getContext().getAuthentication().getName();
+        return repository.findByEmail(usernmae).orElseThrow();
+    }
 }

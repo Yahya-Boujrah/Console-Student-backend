@@ -71,7 +71,7 @@ public class DemandeController {
     }
 
 
-    @PutMapping("/updateStatus")
+    @PutMapping("/updateStatus/{id}")
     public ResponseEntity<Response> updateStatus(@PathVariable String id, @RequestBody UpdateRequest request){
         return ResponseEntity.ok(
                 Response.builder()

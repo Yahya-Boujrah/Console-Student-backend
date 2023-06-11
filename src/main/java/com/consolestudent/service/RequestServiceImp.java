@@ -1,10 +1,7 @@
 package com.consolestudent.service;
 
-import com.consolestudent.model.Demande;
 import com.consolestudent.model.Request;
 import com.consolestudent.model.User;
-import com.consolestudent.payloads.CaseRequest;
-import com.consolestudent.payloads.ServiceRequest;
 import com.consolestudent.repo.RequestRepo;
 import com.consolestudent.repo.UserRepository;
 import jakarta.transaction.Transactional;

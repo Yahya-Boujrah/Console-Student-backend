@@ -3,7 +3,6 @@ package com.consolestudent.controllers;
 
 import com.consolestudent.model.Demande;
 import com.consolestudent.model.Response;
-import com.consolestudent.payloads.UpdateRequest;
 import com.consolestudent.service.DemandeServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

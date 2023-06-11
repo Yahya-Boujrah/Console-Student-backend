@@ -19,10 +19,12 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Annonce {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    private String salesforceId;
     private String titre;
     private String contenu;
     private String niveaux;
     private String filiere;
     private Date datePublication;
+    private String fileUrl;
 
 }

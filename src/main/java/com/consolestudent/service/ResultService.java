@@ -28,13 +28,14 @@ public class ResultService {
                         .note(Float.valueOf(test.split(":")[1]))
                         .build());
         }
-
         Result result1 = Result.builder()
                 .name(result.getName())
                 .cne(result.getCne())
                 .note_finale(result.getNote_finale())
-                .notes(notes)
                 .build();
+        notes.forEach(note -> note.setResult(result1));
+
+        result1.setNotes(notes);
 
        return resultRepo.save(result1);
 

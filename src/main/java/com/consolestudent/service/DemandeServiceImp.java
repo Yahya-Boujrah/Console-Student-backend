@@ -4,7 +4,6 @@ import com.consolestudent.model.Demande;
 import com.consolestudent.model.User;
 import com.consolestudent.payloads.SalesforceId;
 import com.consolestudent.payloads.ServiceRequest;
-import com.consolestudent.payloads.UpdateRequest;
 import com.consolestudent.repo.DemandeRepo;
 import com.consolestudent.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -12,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -99,9 +97,9 @@ public class DemandeServiceImp implements DemandeService{
     public Mono<Void> deleteInSalesforce(Long id) {
         String oauthToken = salesforceService.loginSalesforce();
 
-        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/").build()
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/" + id).build()
                 .delete()
-                .uri(String.valueOf(id))
+                //.uri(String.valueOf(id))
                 .header("Authorization", "Bearer " + oauthToken)
                 .retrieve()
                 .bodyToMono(Void.class);

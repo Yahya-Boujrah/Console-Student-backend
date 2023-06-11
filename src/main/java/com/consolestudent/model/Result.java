@@ -1,6 +1,7 @@
 package com.consolestudent.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class Result {
 
         private String cne;
 
+        @JsonIgnore
         @OneToMany(mappedBy = "result", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Note> notes;
 

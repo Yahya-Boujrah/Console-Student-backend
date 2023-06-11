@@ -6,10 +6,7 @@ import com.consolestudent.payloads.ResultRequest;
 import com.consolestudent.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -36,6 +33,33 @@ public class ResultController {
                         .statusCode(CREATED.value())
                         .build()
         );
+    }
 
+
+    @GetMapping("/listNotes")
+    public ResponseEntity<Response> listNotes(){
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("notes",null))
+                        .message("notes retrieved")
+                        .status(CREATED)
+                        .statusCode(CREATED.value())
+                        .build()
+        );
+    }
+
+    @GetMapping("getResult")
+    public ResponseEntity<Response> getResult(){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("result",null))
+                        .message("result retrieved")
+                        .status(CREATED)
+                        .statusCode(CREATED.value())
+                        .build()
+        );
     }
 }

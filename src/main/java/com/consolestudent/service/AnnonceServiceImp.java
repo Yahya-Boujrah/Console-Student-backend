@@ -21,4 +21,6 @@ public class AnnonceServiceImp implements AnnonceService{
         log.info("fetching all Announcements");
         return annonceRepo.findAll(PageRequest.of(0,limit)).toList();
     }
+
+
 }

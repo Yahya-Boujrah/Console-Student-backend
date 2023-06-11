@@ -3,6 +3,7 @@ package com.consolestudent.controllers;
 
 import com.consolestudent.model.Demande;
 import com.consolestudent.model.Response;
+import com.consolestudent.payloads.UpdateRequest;
 import com.consolestudent.service.DemandeServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +64,19 @@ public class DemandeController {
                         .timeStamp(now())
                         .data(Map.of("demandes",demandeService.delete(id)))
                         .message("Demand deleted")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+
+    @PutMapping("/updateStatus")
+    public ResponseEntity<Response> updateStatus(@PathVariable String id, @RequestBody UpdateRequest request){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .message(demandeService.updateStatus(id, request))
                         .status(OK)
                         .statusCode(OK.value())
                         .build()

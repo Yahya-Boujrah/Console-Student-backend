@@ -31,6 +31,7 @@ public class ResultService {
 
         Result result1 = Result.builder()
                 .name(result.getName())
+                .cne(result.getCne())
                 .note_finale(result.getNote_finale())
                 .notes(notes)
                 .build();

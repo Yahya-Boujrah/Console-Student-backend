@@ -25,6 +25,8 @@ public class Result {
         private String name;
         private Float note_finale;
 
+        private String cne;
+
         @OneToMany(mappedBy = "result", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Note> notes;
 

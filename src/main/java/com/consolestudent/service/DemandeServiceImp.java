@@ -3,6 +3,7 @@ package com.consolestudent.service;
 import com.consolestudent.model.Demande;
 import com.consolestudent.model.User;
 import com.consolestudent.payloads.ServiceRequest;
+import com.consolestudent.payloads.UpdateRequest;
 import com.consolestudent.repo.DemandeRepo;
 import com.consolestudent.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -68,6 +70,7 @@ public class DemandeServiceImp implements DemandeService{
     public Mono<ServiceRequest> createInSalesforce(Demande demande){
 
         ServiceRequest serviceRequest = ServiceRequest.builder()
+                .BackendId__c(String.valueOf(demande.getId()))
                 .Name(demande.getNom())
                 .Etat__c(demande.getEtat())
                 .Type__c(demande.getType())
@@ -86,8 +89,7 @@ public class DemandeServiceImp implements DemandeService{
     }
 
 
-    public Mono<Void> deleteInSalesforce(Long id)
-    {
+    public Mono<Void> deleteInSalesforce(Long id) {
         String oauthToken = salesforceService.loginSalesforce();
 
         return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/").build()
@@ -96,5 +98,14 @@ public class DemandeServiceImp implements DemandeService{
                 .header("Authorization", "Bearer " + oauthToken)
                 .retrieve()
                 .bodyToMono(Void.class);
+    }
+
+
+    public String updateStatus(String Id, UpdateRequest updateRequest){
+
+        Demande demande = demandeRepo.findById(Long.valueOf(Id)).orElseThrow();
+        demande.setEtat(updateRequest.getStatus());
+        demandeRepo.save(demande);
+        return "status updated to " + demande.getEtat();
     }
 }

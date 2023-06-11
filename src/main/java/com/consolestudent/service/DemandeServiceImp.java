@@ -94,15 +94,17 @@ public class DemandeServiceImp implements DemandeService{
     }
 
 
-    public Mono<Void> deleteInSalesforce(Long id) {
+    public void deleteInSalesforce(Long id) {
         String oauthToken = salesforceService.loginSalesforce();
 
-        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/" + id).build()
+
+        WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/" + id).build()
                 .delete()
                 //.uri(String.valueOf(id))
                 .header("Authorization", "Bearer " + oauthToken)
                 .retrieve()
-                .bodyToMono(Void.class);
+                .toBodilessEntity()
+                .block();
     }
 
 

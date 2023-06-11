@@ -72,11 +72,11 @@ public class DemandeController {
 
 
     @PutMapping("/updateStatus/{id}")
-    public ResponseEntity<Response> updateStatus(@PathVariable String id, @RequestBody UpdateRequest request){
+    public ResponseEntity<Response> updateStatus(@PathVariable String id, @RequestBody Demande demande){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .message(demandeService.updateStatus(id, request))
+                        .message(demandeService.updateStatus(id, demande))
                         .status(OK)
                         .statusCode(OK.value())
                         .build()

@@ -41,7 +41,7 @@ public class DemandeServiceImp implements DemandeService{
         User user = userRepository.findByEmail(username).orElseThrow();
 
         System.out.println(user);
-        demande.setNom(demande.getNom() + " par " + user.getNom() + user.getPrenom());
+        demande.setNom(demande.getNom() + " par " + user.getNom() + " " + user.getPrenom());
         demande.setUser(user);
         demande.setEtat("Nouvelle");
         demande.setDateDemande(new Date());

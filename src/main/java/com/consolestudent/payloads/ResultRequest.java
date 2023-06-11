@@ -10,4 +10,5 @@ public class ResultRequest {
     private Float note_finale;
     private List<String> notes;
     private String name;
+    private String cne;
 }

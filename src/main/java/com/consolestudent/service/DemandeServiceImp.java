@@ -70,7 +70,7 @@ public class DemandeServiceImp implements DemandeService{
     public Mono<ServiceRequest> createInSalesforce(Demande demande){
 
         ServiceRequest serviceRequest = ServiceRequest.builder()
-                .BackendId__c(String.valueOf(demande.getId()))
+                //.BackendId__c(String.valueOf(demande.getId()))
                 .Name(demande.getNom())
                 .Etat__c(demande.getEtat())
                 .Type__c(demande.getType())
@@ -79,7 +79,7 @@ public class DemandeServiceImp implements DemandeService{
         String oauthToken = salesforceService.loginSalesforce();
         System.out.println(oauthToken);
 
-        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/").build()
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests").build()
                 .post()
                 //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
                 .header("Authorization", "Bearer " + oauthToken)

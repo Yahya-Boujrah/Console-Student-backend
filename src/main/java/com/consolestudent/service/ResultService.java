@@ -3,9 +3,13 @@ package com.consolestudent.service;
 
 import com.consolestudent.model.Note;
 import com.consolestudent.model.Result;
+import com.consolestudent.model.User;
 import com.consolestudent.payloads.ResultRequest;
+import com.consolestudent.repo.NoteRepo;
 import com.consolestudent.repo.ResultRepo;
+import com.consolestudent.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +21,10 @@ import java.util.stream.Collectors;
 public class ResultService {
 
     private final ResultRepo resultRepo;
+
+    private final UserRepository userRepo;
+
+    private final NoteRepo noteRepo;
 
     public Result saveResult(ResultRequest result){
 
@@ -39,5 +47,18 @@ public class ResultService {
 
        return resultRepo.save(result1);
 
+    }
+
+    public Result getResult(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepo.findByEmail(email).orElseThrow();
+        return resultRepo.findByCne(user.getCne()).orElseThrow();
+    }
+
+    public List<Note> notes(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepo.findByEmail(email).orElseThrow();
+        Result result = resultRepo.findByCne(user.getCne()).orElseThrow();
+        return noteRepo.findByResult(result).orElseThrow();
     }
 }

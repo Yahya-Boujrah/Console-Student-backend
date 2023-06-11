@@ -1,6 +1,7 @@
 package com.consolestudent.service;
 
 import com.consolestudent.model.Annonce;
+import com.consolestudent.payloads.AnnonceFileRequest;
 import com.consolestudent.repo.AnnonceRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,14 @@ public class AnnonceServiceImp implements AnnonceService{
     }
 
 
+    public Annonce saveAnnonce(Annonce annonce){
+       return annonceRepo.save(annonce);
+    }
+
+    public Annonce saveAnnonceFile(AnnonceFileRequest request){
+        Annonce annonce = annonceRepo.findBySalesforceId(request.getSalesforceId()).orElseThrow();
+        annonce.setFileUrl(request.getFile());
+
+        return annonceRepo.save(annonce);
+    }
 }

@@ -25,7 +25,6 @@ public class Result {
 
         private String name;
         private Float note_finale;
-
         private String cne;
 
         @JsonIgnore

@@ -6,4 +6,6 @@ import java.util.Collection;
 
 public interface AnnonceService {
     Collection<Annonce> list(int limit);
+
+
 }

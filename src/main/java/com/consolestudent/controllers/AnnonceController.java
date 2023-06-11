@@ -6,7 +6,9 @@ import com.consolestudent.payloads.AnnonceFileRequest;
 import com.consolestudent.service.AnnonceServiceImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Map;
 
@@ -40,5 +42,6 @@ public class AnnonceController {
     public ResponseEntity<Annonce> saveFiles(@RequestBody AnnonceFileRequest request){
         return ResponseEntity.ok(annonceService.saveAnnonceFile(request));
     }
+
 
 }

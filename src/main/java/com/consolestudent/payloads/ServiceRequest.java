@@ -9,6 +9,8 @@ import lombok.Data;
 public class ServiceRequest {
 
 
+    private String BackendId__c;
+
     private String Name;
 
     private String Etat__c;

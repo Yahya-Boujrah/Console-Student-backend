@@ -51,7 +51,9 @@ public class ResultService {
 
     public Result getResult(){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(email);
         User user = userRepo.findByEmail(email).orElseThrow();
+        System.out.println(resultRepo.findByCne(user.getCne()).orElseThrow());
         return resultRepo.findByCne(user.getCne()).orElseThrow();
     }
 

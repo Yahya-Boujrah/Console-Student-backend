@@ -39,14 +39,14 @@ public class RequestServiceImp implements RequestService {
     public String createInSalesforce(Request caseToCreate){
 
         CaseRequest caseRequest = CaseRequest.builder()
-                .RecordTypeName(caseToCreate.getType())
+                .RecordType(caseToCreate.getType())
                 .Subject(caseToCreate.getSujet())
                 .Description(caseToCreate.getDescription())
                 .build();
 
         String oauthToken = salesforceService.loginSalesforce();
 
-        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/Cases/").build()
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/Cases").build()
                 .post()
                 //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
                 .header("Authorization", "Bearer " + oauthToken)

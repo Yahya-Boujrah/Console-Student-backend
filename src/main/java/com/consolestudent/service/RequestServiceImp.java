@@ -31,6 +31,7 @@ public class RequestServiceImp implements RequestService {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(username).orElseThrow();
         caseToCreate.setUser(user);
+        String sfId = createInSalesforce(caseToCreate);
         return requestRepo.save(caseToCreate);
     }
 
@@ -45,6 +46,7 @@ public class RequestServiceImp implements RequestService {
                 .build();
 
         String oauthToken = salesforceService.loginSalesforce();
+        System.out.println(oauthToken);
 
         return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/Cases").build()
                 .post()

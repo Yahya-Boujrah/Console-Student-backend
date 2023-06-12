@@ -46,7 +46,7 @@ public class RequestServiceImp implements RequestService {
 
         String oauthToken = salesforceService.loginSalesforce();
 
-        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests").build()
+        return WebClient.builder().baseUrl("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/Cases/").build()
                 .post()
                 //.uri("https://ensa-a7-dev-ed.develop.my.salesforce.com/services/apexrest/ServiceRequests/")
                 .header("Authorization", "Bearer " + oauthToken)

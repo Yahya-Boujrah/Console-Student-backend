@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 public class CaseRequest {
 
-    String RecordTypeName;
+    String RecordType;
     String Subject;
     String Description;
 
